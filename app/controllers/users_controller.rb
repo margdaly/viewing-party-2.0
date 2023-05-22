@@ -1,25 +1,24 @@
-class UsersController <ApplicationController 
-  def new 
+class UsersController <ApplicationController
+  def new
     @user = User.new
-  end 
+  end
 
-  def show 
+  def show
     @user = User.find(params[:id])
-  end 
+  end
 
-  def create 
-    new_user = User.create(user_params)
-    if new_user.save
-      redirect_to user_path(new_user)
-    else  
-      flash[:error] = new_user.errors.full_messages.to_sentence
+  def create
+    user = User.create(user_params)
+    if user.save
+      redirect_to user_path(user)
+    else
+      flash[:error] = user.errors.full_messages.to_sentence
       redirect_to register_path
-    end 
+    end
   end
 
   def login_form 
   end
- 
 
   def login_user
     user = User.find_by(email: params[:email])
